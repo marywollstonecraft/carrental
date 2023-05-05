@@ -1,3 +1,4 @@
+import datetime
 from datetime import date, timedelta # importa as classes date e timedelta do módulo datetime
 
 # lista para armazenar os objetos das classes
@@ -37,7 +38,7 @@ def editar_funcionario(cpf):
             return
     print("Funcionário não encontrado.")
 
-def consultar_funcionarios(): # printa os atributos do funcionário armazenado na lista
+def consultar_funcionario(): # printa os atributos do funcionário armazenado na lista
     for funcionario in funcionarios:
         print("Nome:", funcionario.nome)
         print("CPF:", funcionario.cpf)
@@ -51,8 +52,6 @@ def remover_funcionario(cpf):
             return
     print("Funcionário não encontrado.")
     
-
-
 
 class Cliente(Usuario): # define a classe Cliente que herda de Usuario
     def __init__(self, nome: str, cpf: str, cnh: str):
@@ -80,7 +79,7 @@ def editar_cliente(cpf):
             return
     print("Cliente não encontrado.")
 
-def consultar_clientes():
+def consultar_cliente():
     for cliente in clientes:
         print("Nome:", cliente.nome)
         print("CPF:", cliente.cpf)
@@ -95,7 +94,7 @@ def remover_cliente(cpf):
     print("Cliente não encontrado.")
 
 
-class Veiculo: # define a classe Veiculo
+class Veiculo: # define a classe veiculo
     def __init__(self, modelo: str, placa: str, cor: str, diaria: float):
         self.modelo = modelo
         self.placa = placa
@@ -127,7 +126,7 @@ def editar_veiculo(placa):
             return
     print("Veículo não encontrado.")
 
-def consultar_veiculos():
+def consultar_veiculo():
     for veiculo in veiculos:
         print("Placa:", veiculo.placa)
         print("Modelo:", veiculo.modelo)
@@ -156,22 +155,15 @@ class Locacao:
 
 def adicionar_locacao():
     cpf = input("CPF do cliente: ")
-    cliente = buscar_cliente(cpf)
-    if cliente is None:
-        print("Cliente não encontrado.")
-        return
     placa = input("Placa do veículo: ")
-    veiculo = buscar_veiculo(placa)
-    if veiculo is None:
-        print("Veículo não encontrado.")
-        return
     data_inicio = input("Data de início (dd/mm/aaaa): ")
     data_fim = input("Data de fim (dd/mm/aaaa): ")
-    valor = calcular_valor(data_inicio, data_fim, veiculo.diaria)
-    locacao = Locacao(cliente, veiculo, data_inicio, data_fim, valor)
-    veiculo.disponivel = False
+    valor = calcular_valor(data_inicio, data_fim, valor)
+    locacao = Locacao(Cliente, Veiculo, data_inicio, data_fim, valor)
+    Veiculo.disponivel = False
     locacoes.append(locacao)
     print("Locação adicionada com sucesso.")
+    return
 
 def consultar_locacoes():
     for locacao in locacoes:
